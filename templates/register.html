@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>CRM注册</title>
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+<body>
+<div class="register-container">
+    <h1>注 册</h1>
+    <div class="connect">
+        <p>欢迎注册CRM系统</p>
+    </div>
+    <form action="" method="post" id="registerForm" novalidate>
+        {% csrf_token %}
+        {#<div>#}
+        {#    <label for="{{ register_form_obj.username.id_for_label }}">{{ register_form_obj.username.label }}</label>#}
+        {#    {{ register_form_obj.username }}#}
+        {#    <span style="color: red; font-size: 12px">{{ register_form_obj.username.errors.0 }}</span>#}
+        {#</div>#}
+        {#<div>#}
+        {#<label for="{{ register_form_obj.password.id_for_label }}">{{ register_form_obj.password.label }}</label>#}
+        {#    {{ register_form_obj.password }}#}
+        {#    <span style="color: red; font-size: 12px">{{ register_form_obj.password.errors.0 }}</span>#}
+        {#</div>#}
+        {#<div>#}
+        {#<label for="{{ register_form_obj.r_password.id_for_label }}">{{ register_form_obj.r_password.label }}</label>#}
+        {#    {{ register_form_obj.r_password }}#}
+        {#    <span style="color: red; font-size: 12px">{{ register_form_obj.r_password.errors.0 }}</span>#}
+        {#</div>#}
+        {#<div>#}
+        {#<label for="{{ register_form_obj.telephone.id_for_label }}">{{ register_form_obj.telephone.label }}</label>#}
+        {#    {{ register_form_obj.telephone }}#}
+        {#    <span style="color: red; font-size: 12px">{{ register_form_obj.telephone.errors.0 }}</span>#}
+        {#</div>#}
+        {#<div>#}
+        {#<label for="{{ register_form_obj.email.id_for_label }}">{{ register_form_obj.email.label }}</label>#}
+        {#    {{ register_form_obj.email }}#}
+        {#    <span style="color: red; font-size: 12px">{{ register_form_obj.email.errors.0 }}</span>#}
+        {#</div>#}
+        {% for obj in register_form_obj %}
+            <div>
+                {{ obj }}
+                <span style="color: red; font-size: 12px">{{ obj.errors.0 }}</span>
+
+            </div>
+        {% endfor %}
+        <button id="submit" type="submit">注 册</button>
+    </form>
+    <a href="{% url 'login' %}">
+        <button type="button" class="register-tis">已经有账号？</button>
+    </a>
+</div>
+</body>
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="{% static 'js/common.js' %}"></script>
+
+<script src="{% static 'js/supersized.3.2.7.min.js' %}"></script>
+<script src="{% static 'js/supersized-init.js' %}"></script>
+
+<script src="{% static 'js/jquery.validate.min.js' %}"></script>
+</html>

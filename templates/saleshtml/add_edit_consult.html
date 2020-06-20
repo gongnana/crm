@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}
+            <h1>
+                {{ label }}
+                <small>可以更新客户信息</small>
+            </h1>
+            {% endblock %}
+{% block content %}
+
+    <form class="form-horizontal" method="post" novalidate>
+    {% csrf_token %}
+        {% for field in consult_form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="col-sm-2 control-label">{{ field.label }}</label>
+                <div class="col-sm-8">
+                    {{ field }}
+                </div>
+                <div class="col-sm-2">
+                    {{ field.errors.0 }}
+                </div>
+            </div>
+        {% endfor %}
+    <button class="btn btn-success">提交</button>
+    </form>
+
+
+{% endblock %}

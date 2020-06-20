@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}
+    <h1>
+{#        {% if tag == '1' %}#}
+{#            公户信息{{ request }}--{{ request.path }}#}
+{#        {% else %}#}
+{#            我的客户信息#}
+{#        {% endif %}#}
+    {% load mytags %}
+{#    {% reverse_url request %}#}
+    报名记录展示
+    </h1>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'enroll_add' %}" class="btn btn-primary">添加报名记录</a>
+    <div class="form-inline">
+        <form action="" class="pull-right">
+            <div class="form-group">
+                <select name="search_field" id="search_field" class="form-control">
+                    <option value="customer__name__contains">客户名称</option>
+                </select>
+                <input type="text" class="form-control" id="key_word" placeholder="请输入搜索内容" name="kw">
+                <button type="submit" class="btn btn-default">搜索🔍</button>
+            </div>
+        </form>
+
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <div class="form-group pull-left">
+            <select name="action" id="action" class="form-control">
+                <option value="bulk_delete">批量删除</option>
+            </select>
+        </div>
+        <button class="btn btn-warning">go</button>
+
+        <table class="table table-striped table-hover table-bordered">
+            <thead>
+            <tr>
+                <th><input type="checkbox" name="select_all"> 选择</th>
+                <th>序号</th>
+                <th>为什么报名</th>
+                <th>审批通过</th>
+                <th>报名日期</th>
+                <th>客户名称</th>
+                <th>小区</th>
+                <th>所报班级</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for enroll in enrolls %}
+                <tr>
+                    <td><input type="checkbox" name="cids" value="{{ enroll.pk }}"></td>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ enroll.why_us }}</td>
+                    <td>{{ enroll.contract_approved }}</td>
+                    <td>{{ enroll.enrolled_date|date:'Y-m-d H:i:s'  }}</td>
+                    <td>{{ enroll.customer }}</td>
+                    <td>{{ enroll.school }}</td>
+                    <td>{{ enroll.enrollment_class }}</td>
+                    <td>
+{#                        <a href="{% url 'edit_customer' customer.pk %}"><i class="fa fa-edit"></i></a>#}
+                        <a href="{% resole_url request 'enroll_edit' enroll.pk%}"><i class="fa fa-edit"></i></a>
+                        <a href=""><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        {{ page_html }}
+    </form>
+{% endblock %}
